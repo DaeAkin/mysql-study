@@ -66,3 +66,20 @@ ANALYZE 명령을 실행하는 동안에는 **MyISAM** 테이블은 읽기는 �
 
 
 ## 실행 계획 분석
+
+ MySQL에서 쿼리의 샐힝 계획을 확인하려면 <u>EXPLAIN</u> 명령을 사용하면 됩니다.
+
+```
+mysql> EXPLAIN SELECT e.emp_no, e.first_name, s.from_date, s.salary From employees e, salaries s where e.emp_no = s.emp_no LIMIT 10;
+```
+
+> 실행 계획 분석 
+
+![](https://github.com/DaeAkin/mysql-study/blob/master/images/%EC%8B%A4%ED%96%89%EA%B3%84%ED%9A%8D1.png?raw=true)
+
+출력된 실행 계획이 위쪽에 출력된 결과일수록(id 값이 작을수록) 쿼리의 바깥 부분이거나 먼저 접근한 테이블이고, 아래쪽에 출력된 결과일수록(id 값이 작을수록) 쿼리의 바깥 부분이거나 먼저 접근한 테이블이고, 아래쪽에 출력된 결과일수록 쿼리의 안쪽 부분 또는 나중에 접근한 테이블에 해당됩니다. 
+
+UPDATE , INSERT , DELETE 에 대해서는 실행 계획을 확인하지 못하는데, WHERE 조건절만 같은 SELECT 문을 만들면 대략적으로 확인이 가능합니다.
+
+### id 칼럼
+
